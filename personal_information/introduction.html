@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 个人介绍</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com  ">
+    <link rel="preconnect" href="https://fonts.gstatic.com  " crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400  ;700;900&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css  ">
+    
+    <style>
+        /* --- 1. 核心变量 (纯粉低饱和 · 无蓝绿) --- */
+        :root {
+            --pink-bg: #FFF0F5;
+            --pink-main: #FFB7C5;
+            --pink-deep: #FF8EA3;
+            --pink-shadow: rgba(255, 183, 197, 0.6);
+            --text-main: #595055;
+            --white-glass: rgba(255, 255, 255, 0.8);
+            --card-border: 4px solid #FFF;
+            --glow-pink: rgba(255, 209, 220, 0.7);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--pink-bg);
+            color: var(--text-main);
+            font-family: 'Quicksand', 'M PLUS Rounded 1c', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            /* 波点纹理 — 萌系标准配置 */
+            background-image: radial-gradient(var(--pink-main) 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
+            position: relative;
+        }
+
+        /* --- ✦ 二次元漂浮物（纯粉星星/爱心）--- */
+        .float-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 30;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            animation: floatSoft 12s infinite ease-in-out;
+            text-shadow: 0 0 6px var(--pink-main);
+        }
+        @keyframes floatSoft {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
+            50% { transform: translateY(-30px) rotate(10deg); opacity: 0.7; }
+            100% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
+        }
+        .heart-particle {
+            color: #FFB7C5;
+            font-size: 1.1rem;
+            filter: drop-shadow(0 0 4px white);
+        }
+        .star-particle {
+            color: #FFF9E6;
+            font-size: 1rem;
+        }
+
+        /* --- 2. 布局框架 --- */
+        .brand-title {
+            position: fixed;
+            top: 40px;
+            left: 60px;
+            z-index: 1000;
+            font-size: 2.0rem;
+            font-weight: 900;
+            color: var(--pink-deep);
+            background: rgba(255,255,255,0.9);
+            padding: 10px 30px;
+            border-radius: 50px;
+            box-shadow: 5px 5px 0 var(--pink-shadow);
+            transform: rotate(-2deg);
+            backdrop-filter: blur(4px);
+        }
+
+        .side-nav {
+            position: fixed;
+            top: 40px;
+            right: 60px;
+            z-index: 1000;
+            display: flex;
+            gap: 15px;
+            background: rgba(255,255,255,0.8);
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 2px solid rgba(255,255,255,0.9);
+        }
+        .nav-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            color: var(--text-main);
+        }
+        .nav-btn.active, .nav-btn:hover {
+            background: var(--pink-main);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px var(--pink-shadow);
+        }
+
+        /* --- 新增：固定返回按钮 --- */
+        .back-button {
+            position: fixed;
+            bottom: 40px;
+            right: 60px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 3px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 
+                0 6px 20px rgba(255, 183, 197, 0.5),
+                0 0 0 4px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            transform: scale(1.15) rotate(-5deg);
+            background: var(--pink-main);
+            box-shadow: 
+                0 8px 25px rgba(255, 142, 163, 0.6),
+                0 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        .back-button:hover i {
+            color: white;
+            transform: translateX(-3px);
+        }
+
+        .back-button i {
+            font-size: 1.5rem;
+            color: var(--pink-deep);
+            transition: all 0.3s ease;
+        }
+
+        /* 按钮装饰小星星 */
+        .back-button::before {
+            content: '✦';
+            position: absolute;
+            top: -8px;
+            left: -5px;
+            font-size: 1.2rem;
+            color: var(--pink-main);
+            animation: twinkle 2s infinite ease-in-out;
+            text-shadow: 0 0 4px white;
+        }
+
+        .back-button::after {
+            content: '♥';
+            position: absolute;
+            bottom: -5px;
+            right: -8px;
+            font-size: 1rem;
+            color: var(--pink-deep);
+            animation: twinkle 2s infinite ease-in-out 0.5s;
+            text-shadow: 0 0 4px white;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        #main-container {
+            height: 100vh;
+            width: 100%;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        .section {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- 3. 人物立绘 (左下) --- */
+        .char-img-fixed {
+            position: fixed;
+            bottom: -30px;
+            left: -50px;
+            height: 85vh;
+            width: auto;
+            z-index: 10;
+            pointer-events: none;
+            filter: drop-shadow(10px 0 20px rgba(255, 160, 180, 0.25));
+            transition: transform 0.1s ease-out;
+        }
+        .char-img-fixed img {
+            height: 100%;
+            width: auto;
+            animation: breathe 5s infinite ease-in-out;
+        }
+        @keyframes breathe {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* --- 新增：斜向层叠爱心容器 --- */
+        .heart-stack-container {
+            position: fixed;
+            top: 25%;
+            left: 14%;
+            z-index: 5;
+            transform: rotate(-12deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: -20px;
+            pointer-events: none;
+        }
+
+        .heart-layer {
+            position: relative;
+            width: 320px;
+            height: 210px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 245, 0.9) 100%);
+            border: 3px solid white;
+            border-radius: 30px;
+            box-shadow: 
+                0 8px 32px rgba(255, 183, 197, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px 25px;
+            margin-bottom: -60px;
+            backdrop-filter: blur(8px);
+        }
+
+        .heart-layer:nth-child(1) { transform: rotate(-5deg) translateX(-10px); z-index: 3; }
+        .heart-layer:nth-child(2) { transform: rotate(3deg) translateX(15px); z-index: 2; background: linear-gradient(135deg, rgba(255, 240, 245, 0.95) 0%, rgba(255, 230, 240, 0.9) 100%); }
+        .heart-layer:nth-child(3) { transform: rotate(-2deg) translateX(-5px); z-index: 1; background: linear-gradient(135deg, rgba(255, 250, 252, 0.95) 0%, rgba(255, 240, 245, 0.9) 100%); }
+
+        .heart-layer::before {
+            content: '♥';
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 2.5rem;
+            color: var(--pink-main);
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+            animation: heartbeat 2s infinite ease-in-out;
+        }
+
+        .heart-layer:nth-child(2)::before {
+            content: '♡';
+            left: 25px;
+            right: auto;
+            color: var(--pink-deep);
+            animation-delay: 0.5s;
+        }
+
+        .heart-layer:nth-child(3)::before {
+            content: '✦';
+            color: #FFD1DC;
+            animation-delay: 1s;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .heart-text {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            line-height: 1.8;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.5px;
+        }
+
+        .heart-text-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .heart-text-line::before {
+            content: '•';
+            color: var(--pink-deep);
+            font-size: 1.0rem;
+        }
+
+        /* 萌系小装饰 */
+        .mini-deco {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0.6;
+            animation: floatSoft 4s infinite ease-in-out;
+        }
+
+        .heart-layer:nth-child(1) .mini-deco { bottom: 10px; left: 15px; content: '✨'; }
+        .heart-layer:nth-child(2) .mini-deco { top: 10px; right: 15px; content: '🌸'; animation-delay: 1s; }
+        .heart-layer:nth-child(3) .mini-deco { bottom: 15px; right: 20px; content: '⭐'; animation-delay: 2s; }
+
+        /* --- 4. 信息卡片 —— 放大至约1/2屏幕 · 标签手账风格（纯文本表情） --- */
+        .info-panel {
+            position: absolute;
+            right: 6%;          /* 位置微调，给放大后的卡片更多呼吸空间 */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50vw;        /* 屏幕宽度一半 */
+            max-width: 820px;   /* 最大宽度限制，避免过大 */
+            min-width: 600px;   /* 最小宽度保证可读性 */
+            background: var(--white-glass);
+            backdrop-filter: blur(20px);
+            padding: 50px 48px; /* 内边距加大，让内容更舒展 */
+            border-radius: 40px;
+            border: 4px solid white;
+            box-shadow: 14px 14px 0 var(--pink-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .panel-deco-tape {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 180px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            z-index: 20;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.9);
+        }
+
+        .hello-title {
+            font-size: 3.2rem;    /* 放大标题 */
+            font-weight: 900;
+            color: var(--pink-deep);
+            margin-bottom: 30px;
+            text-shadow: 4px 4px 0 white;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+
+        /* 信息项 —— 完全依照手账图片，使用emoji，无fontawesome图标 */
+        .info-item {
+            font-size: 1.35rem;    /* 稍大，更清晰 */
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.6);
+            padding: 14px 26px;
+            border-radius: 20px;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.9);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 8px rgba(255,200,210,0.2);
+        }
+        .info-item:hover {
+            background: white;
+            transform: translateX(6px);
+            box-shadow: 0 8px 12px rgba(255,160,180,0.3);
+        }
+        /* 纯文本emoji样式 */
+        .info-emoji {
+            font-size: 1.8rem;
+            margin-right: 20px;
+            width: 40px;
+            text-align: center;
+            filter: drop-shadow(2px 4px 4px rgba(255,150,170,0.3));
+        }
+
+        .tags-box {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .tag-pill {
+            background: white;
+            border: 2px solid var(--pink-main);
+            color: var(--text-main);
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            box-shadow: 4px 4px 0 var(--pink-shadow);
+            transition: 0.2s;
+            backdrop-filter: blur(2px);
+        }
+        .tag-pill:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 7px 7px 0 var(--pink-deep);
+            background: #ffeef2;
+        }
+
+        /* --- 5. 照片墙 · 视差交互卡片 (放大版) --- */
+        .gallery-container {
+            width: 100%;
+            height: 100%;
+            padding: 80px 4%;  /* 减小padding以适应更大卡片 */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            gap: 50px;  /* 减小间距 */
+            overflow: visible;
+        }
+
+        .stack-card {
+            width: 380px;  /* 原320px，放大至380px */
+            height: 520px; /* 原440px，放大至520px */
+            position: relative;
+            cursor: pointer;
+            perspective: 1000px;
+            z-index: 1;
+        }
+
+        .photo-frame {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: white;
+            padding: 18px 18px 60px 18px;  /* 增大padding */
+            border-radius: 18px;  /* 稍大圆角 */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stack-card::before, .stack-card::after {
+            content: '';
+            position: absolute;
+            width: 100%; height: 100%;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.4s ease;
+            z-index: -1;
+            border: 1px solid #eee;
+        }
+        .stack-card::before { top: 0; left: 0; transform: rotate(3deg); }
+        .stack-card::after { top: 0; left: 0; transform: rotate(-2deg); }
+        .stack-card:hover { z-index: 100; }
+        .stack-card:hover .photo-frame { transform: translateY(-10px) rotate(0); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .stack-card:hover::before { transform: translate(15px, 10px) rotate(6deg); }
+        .stack-card:hover::after { transform: translate(-15px, 10px) rotate(-6deg); }
+
+        .img-viewport {
+            width: 100%;
+            flex: 1;
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+            background: #f9eef0;
+            margin-bottom: 10px;
+        }
+
+        .img-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.2s ease-out;
+            pointer-events: none;
+        }
+        .img-slide.active {
+            opacity: 1;
+        }
+
+        .photo-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 8px;
+            padding: 0 8px;
+            z-index: 30;
+            position: relative;
+        }
+        .nav-arrow {
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(4px);
+            width: 40px;  /* 稍大 */
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pink-deep);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 8px rgba(255, 150, 170, 0.2);
+            border: 2px solid white;
+        }
+        .nav-arrow:hover {
+            background: var(--pink-main);
+            color: white;
+            transform: scale(1.15);
+            box-shadow: 0 6px 12px var(--pink-shadow);
+        }
+        .dot-indicator {
+            display: flex;
+            gap: 10px;
+            background: rgba(255,255,255,0.6);
+            padding: 6px 14px;
+            border-radius: 30px;
+            backdrop-filter: blur(2px);
+        }
+        .dot {
+            width: 12px;  /* 稍大 */
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 183, 197, 0.5);
+            border: 1px solid white;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .dot.active-dot {
+            background: var(--pink-deep);
+            transform: scale(1.4);
+            box-shadow: 0 0 6px var(--pink-main);
+        }
+
+        .stack-label {
+            font-size: 1.5rem;  /* 放大字体 */
+            font-weight: 700;
+            color: var(--text-main);
+            text-align: center;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .sticker {
+            position: absolute;
+            font-size: 3rem;  /* 放大贴纸 */
+            filter: drop-shadow(4px 6px 0 rgba(255, 200, 210, 0.5));
+            z-index: 40;
+            color: #FFB7C5;
+            -webkit-text-stroke: 2px white;
+            text-shadow: 2px 4px 6px rgba(255, 140, 170, 0.3);
+            pointer-events: none;
+        }
+        .fa-plane.sticker { transform: rotate(15deg); top: -25px; right: -25px; }
+        .fa-lipstick.sticker { bottom: 80px; right: -25px; transform: rotate(-10deg); font-size: 2.8rem; }
+        .fa-camera-retro.sticker { top: -20px; left: -20px; transform: rotate(-8deg); }
+
+        /* 响应式微调：确保超大/超小屏幕依然美观 */
+        @media (max-width: 1300px) {
+            .info-panel {
+                width: 55vw;
+                min-width: 500px;
+                right: 4%;
+                padding: 40px 36px;
+            }
+            .hello-title { font-size: 2.8rem; }
+            .info-item { font-size: 1.2rem; padding: 12px 22px; }
+            
+            /* 爱心容器响应式 */
+            .heart-stack-container {
+                left: 12%;
+                transform: rotate(-12deg) scale(0.9);
+            }
+            .heart-layer {
+                width: 240px;
+                height: 180px;
+            }
+            
+            /* 卡片响应式 */
+            .stack-card {
+                width: 340px;
+                height: 460px;
+            }
+            .gallery-container {
+                gap: 40px;
+                padding: 60px 3%;
+            }
+
+            /* 返回按钮响应式 */
+            .back-button {
+                width: 55px;
+                height: 55px;
+                bottom: 30px;
+                right: 40px;
+            }
+        }
+        @media (max-width: 900px) {
+            .info-panel {
+                width: 70vw;
+                min-width: 400px;
+                right: 5%;
+                padding: 30px 28px;
+            }
+            .hello-title { font-size: 2.4rem; }
+            
+            .heart-stack-container {
+                left: 5%;
+                bottom: 5%;
+                transform: rotate(-12deg) scale(0.8);
+            }
+            
+            .stack-card {
+                width: 300px;
+                height: 410px;
+            }
+
+            .back-button {
+                width: 50px;
+                height: 50px;
+                bottom: 25px;
+                right: 30px;
+            }
+            .back-button i {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ✦ 纯粉漂浮粒子：星星/爱心 —— 二次元萌系氛围 ✦ -->
+    <div class="float-particle" style="top: 15%; left: 8%; animation-delay: 0s;"><i class="fas fa-star star-particle"></i></div>
+    <div class="float-particle" style="top: 70%; left: 12%; animation-delay: 3s;"><i class="fas fa-heart heart-particle"></i></div>
+    <div class="float-particle" style="top: 45%; left: 88%; animation-delay: 1.5s;"><i class="fas fa-star star-particle"></i></div>
+    <div class="float-particle" style="top: 80%; right: 15%; animation-delay: 5s;"><i class="fas fa-heart heart-particle"></i></div>
+    <div class="float-particle" style="top: 25%; left: 92%; animation-delay: 2s;"><i class="fas fa-music" style="color: #FFCCCC;"></i></div>
+    <div class="float-particle" style="top: 88%; left: 28%; animation-delay: 4s;"><i class="fas fa-cookie-bite" style="color: #FFDDCC;"></i></div>
+
+    <div class="brand-title">
+        <i class="fas fa-cherry-blossom" style="color: #FFAAB5; margin-right:5px;"></i> Self-introduction page
+    </div>
+
+    <nav class="side-nav">
+        <div class="nav-btn active" onclick="switchSection(0)">基本信息</div>
+        <div class="nav-btn" onclick="switchSection(1)">照片墙</div>
+    </nav>
+
+    <!-- 新增：固定返回按钮 -->
+    <div class="back-button" onclick="goBack()" title="返回首页">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+
+    <div id="main-container">
+        <!-- ===== 第一部分：个人信息 —— 完全按照手账图片样式 ===== -->
+        <section class="section">
+            <div class="char-img-fixed">
+                <img src="./2zishe.gif" alt="栀茉立绘">
+            </div>
+
+            <!-- 新增：斜向层叠爱心容器 -->
+            <div class="heart-stack-container">
+                <div class="heart-layer">
+                    <div class="heart-text">
+                        <div class="heart-text-line">再次感谢来访主页~</div>
+                        <div class="heart-text-line">生日 2005.11.1</div>
+                        <div class="heart-text-line">（广告位：求约中二节奏出勤）</div>
+                    </div>
+                    <span class="mini-deco">✨</span>
+                </div>
+                <div class="heart-layer">
+                    <div class="heart-text">
+                        <div class="heart-text-line"> </div>
+                        <div class="heart-text-line">三次宫脇咲良</div>
+                        <div class="heart-text-line">二次本命结城理<br>+短发坚强小天使萌妹重度依赖</div>
+                    </div>
+                    <span class="mini-deco">🌸</span>
+                </div>
+                <div class="heart-layer">
+                    <div class="heart-text">
+                        <div class="heart-text-line">  </div>
+                        <div class="heart-text-line">主坑：Persona系列，PJSK</div>
+                        <div class="heart-text-line">（主明姐彰冬姐务必私联我QAQ</div>
+                    </div>
+                    <span class="mini-deco">⭐</span>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="panel-deco-tape"></div>
+                <!-- 标题：去除星星表情，纯文本，与图片一致 -->
+                <h1 class="hello-title">CN 栀茉/Mroly</h1>
+                
+                <!-- 信息项 —— 使用纯文本emoji，完全按照图片内容，无FontAwesome图标 -->
+                <div class="info-item">
+                    <span class="info-emoji">❤️</span>
+                    <span>用能力和热爱构筑理想世界</span>  
+                </div>
+                <div class="info-item">
+                    <span class="info-emoji">❤️</span>
+                    <span>MBTI INFJ-A </span>
+                </div>
+                <div class="info-item">
+                    <span class="info-emoji">❤️</span>
+                    <span>中二节奏/E舞成名/P系列/PJSK</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-emoji">❤️</span>
+                    <span>板绘/彩铅</span>
+                </div>
+
+                <!-- 标签：完全保留，与图片一致 -->
+                <div class="tags-box">
+                    <div class="tag-pill">🎨 绘画</div>
+                    <div class="tag-pill">💄 美妆</div>
+                    <div class="tag-pill">🎵 音乐</div>
+                    <div class="tag-pill">🎮 游戏</div>
+   
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 第二部分：照片墙 · 视差交互卡片 (完全保留) ===== -->
+        <section class="section">
+            <div class="gallery-container">
+                
+                <!-- 卡片1 · 旅行 -->
+                <div class="stack-card" data-card="travel">
+                    <div class="photo-frame">
+                        <div class="img-viewport" id="gallery-travel">
+                            <img src="./introduction_pic/travel/1.jpg" class="img-slide active">
+                            <img src="./introduction_pic/travel/2.jpg" class="img-slide">
+                            <img src="./introduction_pic/travel/3.jpg" class="img-slide">
+                            <img src="./introduction_pic/travel/4.jpg" class="img-slide">
+                            <img src="./introduction_pic/travel/5.jpg" class="img-slide">
+                            <img src="./introduction_pic/travel/6.jpg" class="img-slide">
+                            <img src="./introduction_pic/travel/7.jpg" class="img-slide">
+                        </div>
+                        <div class="photo-controls">
+                            <div class="nav-arrow prev"><i class="fas fa-chevron-left"></i></div>
+                            <div class="dot-indicator"></div>
+                            <div class="nav-arrow next"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        <div class="stack-label">
+                            <i class="fas fa-plane"></i> 旅行
+                        </div>
+                    </div>
+                    <i class="fas fa-plane sticker"></i>
+                </div>
+
+                <!-- 卡片2 · 没想好放什么 -->
+                <div class="stack-card" data-card="makeup">
+                    <div class="photo-frame">
+                        <div class="img-viewport" id="gallery-makeup">
+                            <img src="./introduction_pic/game/1.jpg" class="img-slide active">
+                            <img src="./introduction_pic/game/2.jpg" class="img-slide">
+                           
+                        </div>
+                        <div class="photo-controls">
+                            <div class="nav-arrow prev"><i class="fas fa-chevron-left"></i></div>
+                            <div class="dot-indicator"></div>
+                            <div class="nav-arrow next"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        <div class="stack-label">
+                            <i class="fas fa-lipstick"></i> （凑数中）
+                        </div>
+                    </div>
+                    <i class="fas fa-lipstick sticker"></i>
+                </div>
+
+                <!-- 卡片3 · 生活 -->
+                <div class="stack-card" data-card="life">
+                    <div class="photo-frame">
+                        <div class="img-viewport" id="gallery-art">
+                            <img src="./introduction_pic/life/1.jpg" class="img-slide active">
+                            <img src="./introduction_pic/life/2.jpg" class="img-slide">
+                            <img src="./introduction_pic/life/3.jpg" class="img-slide">
+                            <img src="./introduction_pic/life/4.jpg" class="img-slide">
+                            <img src="./introduction_pic/life/5.jpg" class="img-slide">
+                        </div>
+                        <div class="photo-controls">
+                            <div class="nav-arrow prev"><i class="fas fa-chevron-left"></i></div>
+                            <div class="dot-indicator"></div>
+                            <div class="nav-arrow next"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        <div class="stack-label">
+                            <i class="fas fa-camera-retro"></i> 生活
+                        </div>
+                    </div>
+                    <i class="fas fa-camera-retro sticker"></i>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // --- 1. 页面切换逻辑 ---
+        const container = document.getElementById('main-container');
+        const navBtns = document.querySelectorAll('.nav-btn');
+
+        function switchSection(index) {
+            container.style.transform = `translateY(-${index * 100}vh)`;
+            navBtns.forEach(btn => btn.classList.remove('active'));
+            navBtns[index].classList.add('active');
+        }
+
+        // --- 新增：返回首页功能 ---
+        function goBack() {
+            // 方式1：使用浏览器历史记录返回（推荐，可以返回到index.html）
+            window.history.back();
+            
+            // 方式2：如果history.back()不起作用，可以取消注释下面这行直接指定路径
+            // window.location.href = 'index.html';
+        }
+
+        // --- 2. ✨ 照片墙交互：手动切换 + 小圆点 + 视差 (完全保留) ---
+        function initPhotoWall() {
+            const cards = document.querySelectorAll('.stack-card');
+            
+            cards.forEach(card => {
+                const viewport = card.querySelector('.img-viewport');
+                const slides = viewport.querySelectorAll('.img-slide');
+                const prevBtn = card.querySelector('.prev');
+                const nextBtn = card.querySelector('.next');
+                const dotContainer = card.querySelector('.dot-indicator');
+                
+                let currentIdx = 0;
+                const total = slides.length;
+
+                dotContainer.innerHTML = '';
+                for (let i = 0; i < total; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active-dot');
+                    dot.dataset.index = i;
+                    dotContainer.appendChild(dot);
+                }
+
+                const dots = dotContainer.querySelectorAll('.dot');
+
+                function showSlide(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active-dot', i === index);
+                    });
+                    currentIdx = index;
+                }
+
+                prevBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    let newIdx = currentIdx - 1;
+                    if (newIdx < 0) newIdx = total - 1;
+                    showSlide(newIdx);
+                });
+
+                nextBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    let newIdx = currentIdx + 1;
+                    if (newIdx >= total) newIdx = 0;
+                    showSlide(newIdx);
+                });
+
+                dots.forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const idx = parseInt(dot.dataset.index, 10);
+                        showSlide(idx);
+                    });
+                });
+
+                // 视差效果
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left;
+                    const mouseY = e.clientY - rect.top;
+                    
+                    const moveX = (mouseX / rect.width - 0.5) * 12;
+                    const moveY = (mouseY / rect.height - 0.5) * 8;
+                    
+                    const activeImg = card.querySelector('.img-slide.active');
+                    if (activeImg) {
+                        activeImg.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    const activeImg = card.querySelector('.img-slide.active');
+                    if (activeImg) {
+                        activeImg.style.transform = `translate(0, 0)`;
+                    }
+                });
+
+                showSlide(0);
+            });
+        }
+
+        // --- 3. 人物鼠标视差 ---
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth - e.pageX) / 60;
+            const y = (window.innerHeight - e.pageY) / 60;
+            const char = document.querySelector('.char-img-fixed');
+            if(char) {
+                char.style.transform = `translate(${x}px, ${y}px)`;
+            }
+        });
+
+        // --- 4. 滚轮切换页面 (仅在非卡片区域触发) ---
+        let isScrolling = false;
+        window.addEventListener('wheel', (e) => {
+            const isOnCard = e.target.closest('.stack-card');
+            if (isOnCard) return;
+            if (isScrolling) return;
+            if (e.deltaY > 0) switchSection(1);
+            else switchSection(0);
+            
+            isScrolling = true;
+            setTimeout(() => isScrolling = false, 800);
+        });
+
+        // 启动照片墙交互
+        initPhotoWall();
+
+        // 额外动态粒子点缀
+        function addExtraTwinkle() {
+            const body = document.body;
+            for (let i = 0; i < 6; i++) {
+                const span = document.createElement('i');
+                span.className = 'fas fa-heart float-particle heart-particle';
+                span.style.position = 'fixed';
+                span.style.left = Math.random() * 100 + '%';
+                span.style.top = Math.random() * 100 + '%';
+                span.style.animationDelay = Math.random() * 8 + 's';
+                span.style.fontSize = (Math.random() * 14 + 10) + 'px';
+                span.style.opacity = 0.4;
+                span.style.pointerEvents = 'none';
+                span.style.zIndex = '25';
+                body.appendChild(span);
+            }
+        }
+        addExtraTwinkle();
+
+        // 默认显示第一页
+        switchSection(0);
+    </script>
+</body>
+</html>

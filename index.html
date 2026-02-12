@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>感谢来访栀茉的主页⸜(๑'ᵕ'๑)⸝⋆*</title>
+    <!-- 字体与图标库 -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/decoration.js" defer></script>
+    <style>
+        /* ==================== 完整样式 (完全保留原样) ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', 'Comic Neue', sans-serif;
+        }
+
+        body {
+            background: url('./personal_information/mainbg.png') no-repeat center center fixed;
+            background-size: cover;
+            background-color: #FFE6EA; 
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #90363B;
+        }
+
+        /* ==================== 优化：3D视差背景层 ==================== */
+        .parallax-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* 云朵层 - 3D视差 - 优化可见性 */
+        .cloud-layer {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            transition: transform 0.1s ease-out;
+        }
+
+        .cloud {
+            position: absolute;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(255, 248, 220, 0.85) 40%,
+                rgba(255, 230, 234, 0.8) 100%);
+            border-radius: 100px;
+            filter: blur(8px);
+            opacity: 0.85;
+            box-shadow: 
+                0 0 40px rgba(255, 255, 255, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.8);
+            animation: cloudFloat 20s ease-in-out infinite;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 100px;
+            box-shadow: inherit;
+        }
+
+        .cloud-1 {
+            width: 220px;
+            height: 90px;
+            top: 8%;
+            left: 5%;
+            animation-delay: 0s;
+            opacity: 0.9;
+        }
+
+        .cloud-1::before {
+            width: 110px;
+            height: 110px;
+            top: -55px;
+            left: 25px;
+        }
+
+        .cloud-1::after {
+            width: 90px;
+            height: 90px;
+            top: -35px;
+            right: 25px;
+        }
+
+        .cloud-2 {
+            width: 180px;
+            height: 70px;
+            top: 35%;
+            left: -2%;
+            animation-delay: -5s;
+            opacity: 0.75;
+        }
+
+        .cloud-2::before {
+            width: 90px;
+            height: 90px;
+            top: -45px;
+            left: 35px;
+        }
+
+        .cloud-2::after {
+            width: 70px;
+            height: 70px;
+            top: -25px;
+            right: 35px;
+        }
+
+        .cloud-3 {
+            width: 200px;
+            height: 80px;
+            top: 15%;
+            right: 8%;
+            left: auto;
+            animation-delay: -10s;
+            opacity: 0.85;
+        }
+
+        .cloud-3::before {
+            width: 100px;
+            height: 100px;
+            top: -50px;
+            left: 30px;
+        }
+
+        .cloud-3::after {
+            width: 80px;
+            height: 80px;
+            top: -30px;
+            right: 30px;
+        }
+
+        .cloud-4 {
+            width: 160px;
+            height: 65px;
+            top: 55%;
+            right: 5%;
+            left: auto;
+            animation-delay: -15s;
+            opacity: 0.7;
+        }
+
+        .cloud-4::before {
+            width: 80px;
+            height: 80px;
+            top: -40px;
+            left: 25px;
+        }
+
+        .cloud-4::after {
+            width: 65px;
+            height: 65px;
+            top: -20px;
+            right: 25px;
+        }
+
+        /* 新增：更多云朵 */
+        .cloud-5 {
+            width: 140px;
+            height: 55px;
+            top: 75%;
+            left: 12%;
+            animation-delay: -7s;
+            opacity: 0.65;
+        }
+
+        .cloud-5::before {
+            width: 70px;
+            height: 70px;
+            top: -35px;
+            left: 20px;
+        }
+
+        .cloud-5::after {
+            width: 55px;
+            height: 55px;
+            top: -18px;
+            right: 20px;
+        }
+
+        .cloud-6 {
+            width: 190px;
+            height: 75px;
+            top: 45%;
+            left: 45%;
+            animation-delay: -12s;
+            opacity: 0.6;
+        }
+
+        .cloud-6::before {
+            width: 95px;
+            height: 95px;
+            top: -48px;
+            left: 28px;
+        }
+
+        .cloud-6::after {
+            width: 75px;
+            height: 75px;
+            top: -28px;
+            right: 28px;
+        }
+
+        @keyframes cloudFloat {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
+            }
+            25% {
+                transform: translateX(25px) translateY(-12px);
+            }
+            50% {
+                transform: translateX(-15px) translateY(8px);
+            }
+            75% {
+                transform: translateX(20px) translateY(-8px);
+            }
+        }
+
+        /* 梦幻光晕层 - 增强可见性 */
+        .glow-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.5;
+            animation: glowPulse 8s ease-in-out infinite;
+        }
+
+        .glow-1 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, 
+                rgba(255, 248, 200, 0.8) 0%, 
+                rgba(255, 230, 234, 0.5) 40%,
+                transparent 70%);
+            top: 5%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .glow-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, 
+                rgba(253, 168, 179, 0.7) 0%, 
+                rgba(255, 209, 217, 0.4) 50%,
+                transparent 70%);
+            top: 45%;
+            right: 20%;
+            animation-delay: -3s;
+        }
+
+        .glow-3 {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, 
+                rgba(255, 230, 234, 0.9) 0%, 
+                rgba(255, 248, 220, 0.5) 50%,
+                transparent 70%);
+            bottom: 15%;
+            left: 25%;
+            animation-delay: -6s;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 0.7;
+            }
+        }
+
+        /* 星星粒子层 - 增强 */
+        .stars-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .star {
+            position: absolute;
+            color: rgba(255, 248, 200, 0.95);
+            font-size: 14px;
+            animation: starTwinkle 3s ease-in-out infinite;
+            text-shadow: 
+                0 0 10px rgba(255, 248, 200, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 0 5px rgba(255, 248, 200, 0.6));
+        }
+
+        .star::before {
+            content: '✦';
+        }
+
+        .star:nth-child(3n)::before {
+            content: '✧';
+        }
+
+        .star:nth-child(5n)::before {
+            content: '⋆';
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% {
+                opacity: 0.4;
+                transform: scale(0.8) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.3) rotate(180deg);
+            }
+        }
+
+        /* 装饰性几何图形 - 增强可见性 */
+        .geometry-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .geo-shape {
+            position: absolute;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.25) 0%, 
+                rgba(255, 230, 234, 0.15) 100%);
+            backdrop-filter: blur(3px);
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+            animation: geoRotate 30s linear infinite;
+        }
+
+        .geo-1 {
+            width: 120px;
+            height: 120px;
+            top: 18%;
+            left: 12%;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation-duration: 25s;
+        }
+
+        .geo-2 {
+            width: 100px;
+            height: 100px;
+            top: 60%;
+            right: 18%;
+            border-radius: 50%;
+            animation-duration: 35s;
+            animation-direction: reverse;
+        }
+
+        .geo-3 {
+            width: 80px;
+            height: 80px;
+            bottom: 25%;
+            left: 22%;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation-duration: 20s;
+        }
+
+        @keyframes geoRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 原花瓣雨容器 - 提升z-index确保在最上层 */
+        .petal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .petal {
+            position: absolute;
+            background-color: rgba(255, 230, 234, 0.7);
+            border-radius: 50% 20% 50% 20%;
+            width: 20px;
+            height: 20px;
+            top: -20px;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .contact-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 12px 30px;
+            z-index: 90;
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 4px 15px rgba(253, 168, 179, 0.2);
+            border-bottom: 2px solid rgba(253, 168, 179, 0.3);
+        }
+
+        .contact-info {
+            text-align: center;
+            color: #90363B;
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+        }
+
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 70px;
+            padding-bottom: 30px;
+            padding-left: 30px;
+            padding-right: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .title-section {
+            flex: 1;
+            min-width: 20%;
+            max-width: 20%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .vertical-title {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #FAF9D8;
+            text-shadow: 
+                0 0 10px rgba(255, 230, 234, 0.8),
+                2px 2px 4px rgba(144, 54, 59, 0.4);
+            letter-spacing: 10px;
+            line-height: 1.4;
+            padding: 30px 15px;
+            position: relative;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 
+                0 8px 32px rgba(144, 54, 59, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .clover-section {
+            flex: 3;
+            min-width: 60%;
+            max-width: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 80vh;
+        }
+
+        .clover-container {
+            position: relative;
+            width: 550px;
+            height: 550px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .heart-btn {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(145deg, #FFE6EA, #FDA8B3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FAF9D8;
+            font-weight: 800;
+            cursor: pointer;
+            border: none;
+            border-radius: 50% 30% 50% 30% / 60% 40% 60% 40%;
+            top: 45%;
+            left: 50%;
+            margin-top: -200px;
+            margin-left: 0;
+            transform-origin: bottom left;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(144, 54, 59, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 3px rgba(144, 54, 59, 0.5);
+            font-size: 26px;
+            z-index: 10;
+        }
+
+        .heart-btn::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+            border-radius: inherit;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .heart-btn:hover {
+            z-index: 15;
+            background: linear-gradient(145deg, #FFD1D9, #FF8FA3);
+            box-shadow: 0 0 0 8px rgba(255, 248, 200, 0.5), 0 20px 40px rgba(144, 54, 59, 0.6);
+            transform: scale(1.1);
+        }
+
+        .heart-btn:active {
+            transform: scale(1.05);
+            filter: brightness(0.95);
+        }
+
+        .heart-top { transform: rotate(45deg); }
+        .heart-top:hover { transform: rotate(45deg) scale(1.1); }
+        .heart-right { transform: rotate(135deg); }
+        .heart-right:hover { transform: rotate(135deg) scale(1.1); }
+        .heart-bottom { transform: rotate(225deg); }
+        .heart-bottom:hover { transform: rotate(225deg) scale(1.1); }
+        .heart-left { transform: rotate(315deg); }
+        .heart-left:hover { transform: rotate(315deg) scale(1.1); }
+
+        .btn-text {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-weight: 800;
+        }
+        .heart-top .btn-text { transform: rotate(-45deg); }
+        .heart-right .btn-text { transform: rotate(-135deg); }
+        .heart-bottom .btn-text { transform: rotate(-225deg); }
+        .heart-left .btn-text { transform: rotate(-315deg); }
+
+        /* 花朵交互元素 */
+        .flower-interactive {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 25;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: auto;
+            width: 120px;
+            height: 120px;
+        }
+
+        .flower-shape {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: center;
+        }
+
+        .flower-center {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, #FFE6EA, #FDA8B3);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 3px 10px rgba(144, 54, 59, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .flower-petal {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #FFE6EA, #FDA8B3);
+            border-radius: 50% 30% 50% 30% / 60% 40% 60% 40%;
+            box-shadow: 0 3px 8px rgba(144, 54, 59, 0.15), inset 0 0 8px rgba(255, 255, 255, 0.8);
+            z-index: 0;
+        }
+
+        .petal-1 { transform: translate(0, -50px) rotate(0deg); }
+        .petal-2 { transform: translate(35px, -35px) rotate(45deg); }
+        .petal-3 { transform: translate(50px, 0) rotate(90deg); }
+        .petal-4 { transform: translate(35px, 35px) rotate(135deg); }
+        .petal-5 { transform: translate(0, 50px) rotate(180deg); }
+        .petal-6 { transform: translate(-35px, 35px) rotate(225deg); }
+        .petal-7 { transform: translate(-50px, 0) rotate(270deg); }
+        .petal-8 { transform: translate(-35px, -35px) rotate(315deg); }
+
+        .flower-text {
+            position: absolute;
+            color: #FAF9D8;
+            font-weight: 800;
+            font-size: 18px;
+            text-shadow: 1px 1px 3px rgba(144, 54, 59, 0.5);
+            z-index: 2;
+            pointer-events: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        .flower-interactive:hover .flower-shape {
+            transform: scale(1.15) rotate(15deg);
+        }
+
+        .flower-interactive:hover .flower-center,
+        .flower-interactive:hover .flower-petal {
+            background: linear-gradient(145deg, #FFD1D9, #FF8FA3);
+            box-shadow: 0 0 0 4px rgba(255, 248, 200, 0.5), 0 10px 20px rgba(144, 54, 59, 0.5);
+        }
+
+        .flower-interactive-top-left {
+            top: 5%;
+            left: 5%;
+        }
+
+        .flower-interactive-bottom-right {
+            bottom: 5%;
+            right: 5%;
+        }
+
+        /* 玻璃板信息框 */
+        .glass-panel {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(144, 54, 59, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #90363B;
+            font-size: 14px;
+            line-height: 1.6;
+            min-width: 500px;
+            max-width: 600px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 30;
+            pointer-events: none;
+        }
+
+        .glass-panel p {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(144, 54, 59, 0.2);
+        }
+
+        .glass-panel p:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        /* ========== 图片区域样式 - 修改为始终固定在右下角 ========== */
+        .image-section {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            z-index: 80;
+            pointer-events: none;
+            /* 移除flex相关属性，使用fixed定位精确控制 */
+            width: auto;
+            height: auto;
+        }
+
+        .character-img {
+            width: auto;
+            height: 70vh;
+            max-height: 80vh;
+            border-radius: 20px 0 0 20px;
+            object-fit: contain;
+            object-position: bottom right;
+            display: block; /* 移除图片底部间隙 */
+        }
+
+        .kawaii-icon {
+            position: absolute;
+            font-size: 24px;
+            color: #FF4081;
+            filter: drop-shadow(0 0 5px rgba(255, 64, 129, 0.5));
+            animation: bounce 2s infinite;
+            z-index: 50;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 密码弹窗样式（完全保留） */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(144, 54, 59, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .password-modal {
+            background: rgba(255, 245, 240, 0.35);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 30px 35px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 15px 40px rgba(144, 54, 59, 0.25);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            color: #90363B;
+            position: relative;
+            animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPop {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(253, 168, 179, 0.5);
+        }
+
+        .modal-header h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #FAF9D8;
+            text-shadow: 2px 2px 4px rgba(144, 54, 59, 0.3);
+            letter-spacing: 3px;
+        }
+
+        .modal-close {
+            font-size: 28px;
+            cursor: pointer;
+            color: #FAF9D8;
+            transition: transform 0.2s;
+            line-height: 1;
+            background: rgba(255,255,255,0.2);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-close:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 60px;
+            border: 1.5px solid rgba(253, 168, 179, 0.6);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            font-size: 1rem;
+            color: #90363B;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: #FF8FA3;
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 0 4px rgba(255, 143, 163, 0.2);
+        }
+
+        .modal-input::placeholder {
+            color: rgba(144, 54, 59, 0.6);
+            font-weight: 400;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px 0;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FAF9D8;
+            background: linear-gradient(145deg, #FDA8B3, #FF8FA3);
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 0 rgba(144, 54, 59, 0.2), 0 8px 20px rgba(253, 168, 179, 0.3);
+            text-shadow: 1px 1px 2px rgba(144, 54, 59, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(144, 54, 59, 0.2), 0 12px 30px rgba(253, 168, 179, 0.4);
+            background: linear-gradient(145deg, #FFD1D9, #FF8FA3);
+        }
+
+        .modal-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 rgba(144, 54, 59, 0.2);
+        }
+
+        .modal-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 5px 0 rgba(144, 54, 59, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.9rem;
+            padding-left: 10px;
+            font-weight: 600;
+            min-height: 20px;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+            letter-spacing: 1px;
+        }
+
+        /* 响应式调整（保留原样） */
+        @media (max-width: 1200px) {
+            .main-container { flex-direction: column; }
+            .title-section, .clover-section { max-width: 100%; flex: none; }
+            .vertical-title { writing-mode: horizontal-tb; font-size: 2.8rem; padding: 25px 50px; }
+            .clover-section { height: 70vh; margin-bottom: 30px; }
+            .clover-container { width: 500px; height: 500px; }
+            .heart-btn { width: 180px; height: 180px; margin-top: -180px; }
+            
+            /* ========== 修改：图片区域保持fixed定位，调整大小 ========== */
+            .image-section {
+                position: fixed; /* 保持fixed定位 */
+                right: 0;
+                bottom: 0;
+            }
+            
+            .character-img {
+                height: 50vh; /* 减小高度避免遮挡主要内容 */
+                max-height: 400px;
+                transform: scale(1); /* 移除之前的scale变换 */
+                border-radius: 20px 0 0 20px;
+            }
+            
+            .flower-interactive { width: 100px; height: 100px; }
+            .flower-interactive-top-left { top: 10%; left: 5%; }
+            .flower-interactive-bottom-right { bottom: 10%; right: 5%; }
+            .flower-petal { width: 50px; height: 50px; }
+            .petal-1 { transform: translate(0, -40px) rotate(0deg); }
+            .petal-2 { transform: translate(28px, -28px) rotate(45deg); }
+            .petal-3 { transform: translate(40px, 0) rotate(90deg); }
+            .petal-4 { transform: translate(28px, 28px) rotate(135deg); }
+            .petal-5 { transform: translate(0, 40px) rotate(180deg); }
+            .petal-6 { transform: translate(-28px, 28px) rotate(225deg); }
+            .petal-7 { transform: translate(-40px, 0) rotate(270deg); }
+            .petal-8 { transform: translate(-28px, -28px) rotate(315deg); }
+            .flower-center { width: 30px; height: 30px; }
+            .flower-text { font-size: 16px; }
+        }
+
+        @media (max-width: 768px) {
+            .clover-container { width: 400px; height: 400px; }
+            .heart-btn { width: 150px; height: 150px; margin-top: -150px; font-size: 18px; }
+            .vertical-title { font-size: 2.2rem; }
+            .flower-interactive { width: 80px; height: 80px; }
+            .flower-petal { width: 40px; height: 40px; }
+            .petal-1 { transform: translate(0, -30px) rotate(0deg); }
+            .petal-2 { transform: translate(21px, -21px) rotate(45deg); }
+            .petal-3 { transform: translate(30px, 0) rotate(90deg); }
+            .petal-4 { transform: translate(21px, 21px) rotate(135deg); }
+            .petal-5 { transform: translate(0, 30px) rotate(180deg); }
+            .petal-6 { transform: translate(-21px, 21px) rotate(225deg); }
+            .petal-7 { transform: translate(-30px, 0) rotate(270deg); }
+            .petal-8 { transform: translate(-21px, -21px) rotate(315deg); }
+            .flower-center { width: 25px; height: 25px; }
+            .flower-text { font-size: 14px; }
+            .glass-panel { min-width: 500px; max-width: 600px; font-size: 12px; padding: 20px; }
+            .password-modal { width: 85%; padding: 25px; }
+            .modal-header h3 { font-size: 1.3rem; }
+            
+            /* ========== 修改：更小屏幕下进一步调整图片大小 ========== */
+            .character-img {
+                height: 40vh;
+                max-height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .flower-interactive-top-left,
+            .flower-interactive-bottom-right { display: none; }
+            .password-modal { width: 90%; padding: 20px; }
+            .modal-header h3 { font-size: 1.2rem; }
+            .modal-btn { font-size: 1rem; }
+            
+            /* ========== 修改：手机端最小化图片但不改变位置 ========== */
+            .character-img {
+                height: 35vh;
+                max-height: 250px;
+                opacity: 0.9; /* 轻微透明避免过于突兀 */
+            }
+        }
+
+        ::selection {
+            background: rgba(152, 200, 216, 0.5);
+            color: #0a323b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 优化：3D视差背景层 ==================== -->
+    <div class="parallax-background" id="parallaxBg">
+        <!-- 云朵层 -->
+        <div class="cloud-layer" id="cloudLayer">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+            <div class="cloud cloud-4"></div>
+            <div class="cloud cloud-5"></div>
+            <div class="cloud cloud-6"></div>
+        </div>
+        
+        <!-- 光晕层 -->
+        <div class="glow-layer">
+            <div class="glow-orb glow-1"></div>
+            <div class="glow-orb glow-2"></div>
+            <div class="glow-orb glow-3"></div>
+        </div>
+        
+        <!-- 星星层 -->
+        <div class="stars-layer" id="starsLayer"></div>
+        
+        <!-- 几何图形层 -->
+        <div class="geometry-layer">
+            <div class="geo-shape geo-1"></div>
+            <div class="geo-shape geo-2"></div>
+            <div class="geo-shape geo-3"></div>
+        </div>
+    </div>
+
+    <!-- 花瓣雨容器 -->
+    <div class="petal-container" id="petals-container"></div>
+    
+    <!-- 装饰小图标 -->
+    <div class="kawaii-icon icon1" style="top:15%; right:15%;">✧</div>
+    <div class="kawaii-icon icon2" style="top:65%; right:10%; animation-delay: 0.5s;">✦</div>
+
+    <!-- 顶部导航栏 -->
+    <div class="contact-bar">
+        <div class="contact-info">
+            <div>copyright_by栀茉</div>
+            <div>QQ mail：2678826488@qq.com</div>
+        </div>
+    </div>
+
+    <!-- 主布局 -->
+    <div class="main-container">
+        <!-- 左侧标题区 -->
+        <div class="title-section">
+            <div class="vertical-title">欢迎来到栀茉的小世界</div>
+        </div>
+
+        <!-- 四叶草导航区 -->
+        <div class="clover-section">
+            <!-- 左上角花朵交互（碎碎念） -->
+            <div class="flower-interactive flower-interactive-top-left" id="flower-chat">
+                <div class="flower-shape">
+                    <div class="flower-center"></div>
+                    <div class="flower-petal petal-1"></div>
+                    <div class="flower-petal petal-2"></div>
+                    <div class="flower-petal petal-3"></div>
+                    <div class="flower-petal petal-4"></div>
+                    <div class="flower-petal petal-5"></div>
+                    <div class="flower-petal petal-6"></div>
+                    <div class="flower-petal petal-7"></div>
+                    <div class="flower-petal petal-8"></div>
+                    <div class="flower-text">碎碎念</div>
+                </div>
+            </div>
+            
+            <!-- 右下角花朵交互（信息补充） -->
+            <div class="flower-interactive flower-interactive-bottom-right" id="flower-info">
+                <div class="flower-shape">
+                    <div class="flower-center"></div>
+                    <div class="flower-petal petal-1"></div>
+                    <div class="flower-petal petal-2"></div>
+                    <div class="flower-petal petal-3"></div>
+                    <div class="flower-petal petal-4"></div>
+                    <div class="flower-petal petal-5"></div>
+                    <div class="flower-petal petal-6"></div>
+                    <div class="flower-petal petal-7"></div>
+                    <div class="flower-petal petal-8"></div>
+                    <div class="flower-text">信息补充</div>
+                </div>
+            </div>
+            
+            <div class="clover-container">
+                <!-- 四个导航按钮 -->
+                <button class="heart-btn heart-top" id="btn-intro" onclick="window.location.href='./personal_information/introduction.html'">
+                    <span class="btn-text">个人介绍</span>
+                </button>
+                <button class="heart-btn heart-right" id="btn-works" onclick="window.location.href='./portfolio/portfolio.html'">
+                    <span class="btn-text">作品展示</span>
+                </button>
+                <button class="heart-btn heart-bottom" id="btn-games" onclick="window.location.href='./game_demo/game_demo.html'">
+                    <span class="btn-text">游戏原型</span>
+                </button>
+                <!-- 求职信息按钮（不写onclick，由外部JS绑定） -->
+                <button class="heart-btn heart-left" id="btn-job">
+                    <span class="btn-text">求职信息</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 玻璃板信息框（碎碎念 & 信息补充） -->
+    <div class="glass-panel" id="glass-panel-chat">
+        <p>·感谢您访问我的个人主页~ᵕ̈ ૮ ´͈ ᗜ `͈ აᵕ̈</p>
+        <p>·个人偏好可爱风格，可能看起来会有点幼稚(๑•́ω•̀๑)，希望您多多包涵啦</p>
+        <p>（以及这几个页面配色和风格都有点差别 请做好页面看起来比较割裂的心理准备,,,</p>
+        <p>·PC端浏览器全屏食用体验最佳ꉂ(ˊᗜˋ*)</p>
+        <p>·希望您可以通过我的个人主页对我进行初步了解并产生兴趣~期待和您的进一步沟通</p>
+    </div>
+    
+    <div class="glass-panel" id="glass-panel-info">
+        <p>·一句话定位：一个会绘画和数学，学过舞蹈喜欢音游的211理科生</p>
+        <p>·游戏demo包括unity跑酷试玩/python下落式音游简单实现/界面原型</p>
+        <p>·作品主要为插画作品及游戏相关作品（拆解报告、demo）</p>
+        <p>·求职简历信息仅向HR/面试老师开放</p>
+        <p>·个人介绍为生活兴趣爱好方向记录๑•̀ᴗ•́๑</p>
+    </div>
+
+    <!-- 右侧角色图 -->
+    <div class="image-section">
+        <img src="./personal_information/zishe1.gif" alt="栀茉的二次元形象" class="character-img" id="character-img">
+    </div>
+
+    <!-- ===== 密码弹窗HTML结构（完全保留） ===== -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="password-modal">
+            <div class="modal-header">
+                <h3>🔐 求职信息</h3>
+                <span class="modal-close" id="closeModalBtn">✕</span>
+            </div>
+            <div class="modal-content">
+                <input type="password" id="passwordInput" class="modal-input" placeholder="请输入密码" autocomplete="off">
+                <div class="error-message" id="passwordError"></div>
+                <div class="modal-buttons">
+                    <button class="modal-btn" id="submitPasswordBtn">确认</button>
+                    <button class="modal-btn secondary" id="cancelPasswordBtn">取消</button>
+                </div>
+                <p style="font-size:0.7rem; color:rgba(144,54,59,0.8); margin-top:10px; text-align:center;">
+                    仅提供给HR/面试老师哦
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 内联脚本：仅保留花瓣、按钮特效、花朵交互，密码部分已移除并引入外部JS -->
+    <script>
+        // DOMContentLoaded 初始化函数
+        document.addEventListener('DOMContentLoaded', function() {
+            createPetals();
+            setupButtons();
+            setupFlowerInteractions();
+            setupParallaxBackground(); // 新增：3D视差背景初始化
+            setupPasswordModal(); // 来自外部JS
+        });
+
+        // ==================== 优化：3D视差背景系统 ====================
+        function setupParallaxBackground() {
+            const cloudLayer = document.getElementById('cloudLayer');
+            const starsLayer = document.getElementById('starsLayer');
+            
+            // 创建星星
+            createStars(starsLayer);
+            
+            // 鼠标视差效果
+            let mouseX = 0;
+            let mouseY = 0;
+            let currentX = 0;
+            let currentY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            });
+            
+            // 平滑视差动画
+            function animateParallax() {
+                currentX += (mouseX - currentX) * 0.05;
+                currentY += (mouseY - currentY) * 0.05;
+                
+                // 云朵层移动（较强的视差）
+                cloudLayer.style.transform = `translate(${currentX * 30}px, ${currentY * 20}px)`;
+                
+                requestAnimationFrame(animateParallax);
+            }
+            
+            animateParallax();
+        }
+        
+        function createStars(container) {
+            const starCount = 20; // 增加星星数量
+            const positions = [
+                { top: '8%', left: '15%' },
+                { top: '12%', left: '75%' },
+                { top: '22%', left: '85%' },
+                { top: '28%', left: '10%' },
+                { top: '35%', left: '60%' },
+                { top: '42%', left: '25%' },
+                { top: '48%', left: '90%' },
+                { top: '55%', left: '5%' },
+                { top: '62%', left: '70%' },
+                { top: '68%', left: '35%' },
+                { top: '75%', left: '80%' },
+                { top: '82%', left: '20%' },
+                { top: '88%', left: '55%' },
+                { top: '5%', left: '45%' },
+                { top: '18%', left: '55%' },
+                { top: '32%', left: '40%' },
+                { top: '52%', left: '78%' },
+                { top: '65%', left: '12%' },
+                { top: '78%', left: '65%' },
+                { top: '92%', left: '40%' }
+            ];
+            
+            positions.forEach((pos, index) => {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = pos.top;
+                star.style.left = pos.left;
+                star.style.animationDelay = `${index * 0.3}s`;
+                star.style.fontSize = `${Math.random() * 10 + 12}px`;
+                container.appendChild(star);
+            });
+        }
+
+        // 花瓣雨函数（完全保留）
+        function createPetals() {
+            const container = document.getElementById('petals-container');
+            const petalCount = 20; 
+            const colors = ['rgba(255, 230, 234, 0.8)', 'rgba(253, 168, 179, 0.7)', 'rgba(255, 182, 193, 0.7)'];
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                const size = Math.random() * 15 + 8;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size}px`;
+                petal.style.left = `${Math.random() * 100}%`;
+                petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                const duration = Math.random() * 10 + 15;
+                const delay = Math.random() * 5;
+                petal.style.animation = `fall ${duration}s linear ${delay}s infinite`;
+                petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                container.appendChild(petal);
+            }
+        }
+
+        // 按钮点击爱心特效（完全保留）
+        function setupButtons() {
+            const buttons = document.querySelectorAll('.heart-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤';
+                    heart.style.position = 'fixed';
+                    heart.style.color = '#FF4081';
+                    heart.style.fontSize = '30px';
+                    heart.style.zIndex = '1000';
+                    heart.style.left = `${event.clientX}px`;
+                    heart.style.top = `${event.clientY}px`;
+                    heart.style.pointerEvents = 'none';
+                    heart.style.animation = 'float 1s ease-out forwards';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => { document.body.removeChild(heart); }, 1000);
+                });
+            });
+        }
+
+        // 花朵交互（完全保留）
+        function setupFlowerInteractions() {
+            const flowerChat = document.getElementById('flower-chat');
+            const flowerInfo = document.getElementById('flower-info');
+            const panelChat = document.getElementById('glass-panel-chat');
+            const panelInfo = document.getElementById('glass-panel-info');
+            
+            function updatePanelPositionRight(panel, event) {
+                const mouseX = event.clientX;
+                const mouseY = event.clientY;
+                panel.style.left = `${mouseX + 20}px`;
+                panel.style.top = `${mouseY + 20}px`;
+                const panelRect = panel.getBoundingClientRect();
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                if (panelRect.right > windowWidth) {
+                    panel.style.left = `${windowWidth - panelRect.width - 10}px`;
+                }
+                if (panelRect.bottom > windowHeight) {
+                    panel.style.top = `${windowHeight - panelRect.height - 10}px`;
+                }
+            }
+            
+            function updatePanelPositionLeft(panel, event) {
+                const mouseX = event.clientX;
+                const mouseY = event.clientY;
+                const panelRect = panel.getBoundingClientRect();
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                let leftPos = mouseX - panelRect.width - 20;
+                let topPos = mouseY - panelRect.height - 20;
+                if (leftPos < 10) leftPos = 10;
+                if (topPos < 10) topPos = 10;
+                panel.style.left = `${leftPos}px`;
+                panel.style.top = `${topPos}px`;
+            }
+            
+            flowerChat.addEventListener('mouseenter', function(event) {
+                panelChat.style.opacity = '0.95';
+                panelChat.style.visibility = 'visible';
+                updatePanelPositionRight(panelChat, event);
+            });
+            flowerChat.addEventListener('mousemove', function(event) {
+                updatePanelPositionRight(panelChat, event);
+            });
+            flowerChat.addEventListener('mouseleave', function() {
+                panelChat.style.opacity = '0';
+                panelChat.style.visibility = 'hidden';
+            });
+            
+            flowerInfo.addEventListener('mouseenter', function(event) {
+                panelInfo.style.opacity = '0.95';
+                panelInfo.style.visibility = 'visible';
+                updatePanelPositionLeft(panelInfo, event);
+            });
+            flowerInfo.addEventListener('mousemove', function(event) {
+                updatePanelPositionLeft(panelInfo, event);
+            });
+            flowerInfo.addEventListener('mouseleave', function() {
+                panelInfo.style.opacity = '0';
+                panelInfo.style.visibility = 'hidden';
+            });
+        }
+    </script>
+</body>
+</html>

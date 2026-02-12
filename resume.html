@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>求职信息</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #B5D8EA;       
+      color: #037DD6;           
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.6rem 1.2rem 2rem;
+      transition: padding 0.2s;
+    }
+
+    .page-wrapper {
+      max-width: 1480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* ---------- 顶部联系方式 · 轻柔毛玻璃 ---------- */
+    .top-contact {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 100px;
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 0.5px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 6px 18px rgba(55, 100, 150, 0.12); /* 纯蓝阴影 */
+      color: #0F3C72;            /* 深蓝，原蓝绿#166D7E改为纯蓝 */
+      font-weight: 500;
+      margin-top: 0;
+    }
+
+    /* ---------- 桌面分隔线 · 深蓝 ---------- */
+    .section-divider {
+      width: 100%;
+      height: 0;
+      border: 0;
+      border-top: 2px solid #2d509c;    /* 纯深蓝 */
+      margin: 0.6rem 0 0.2rem;
+      opacity: 0.9;
+      display: none;
+    }
+
+
+    .resume-horizon {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      margin-top: 0.2rem;
+    }
+
+    /* 所有模块 —— 玻璃质感，透出 #B5D8EA 背景 */
+    .module {
+      background: rgba(255, 255, 255, 0.42);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 1.5rem 1.4rem;
+      border: 0.6px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 16px 30px -12px rgba(45, 90, 140, 0.18); /* 纯蓝阴影 */
+      transition: box-shadow 0.25s ease, border-color 0.2s;
+      color: #152f72;           /* 深蓝 */
+      display: flex;
+      flex-direction: column;
+      min-height: 580px;
+    }
+
+    .module:hover {
+      box-shadow: 0 24px 42px -14px rgba(40, 80, 140, 0.25); /* 纯蓝阴影 */
+      border-color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* ---------- 模块1：简历图片（无图标） ---------- */
+    .photo-module {
+      padding: 1.4rem 1.4rem 1.2rem;
+    }
+
+    .pic-wrapper {
+      height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.25);
+      border-radius: 18px;
+      margin-bottom: 1rem;
+    }
+
+    .resume-pic {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.35);
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+
+    .pic-footer {
+      display: flex;
+      align-items: center;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,0.65);
+      color: #1b4280;           /* 深蓝 */
+      font-size: 0.94rem;
+      font-weight: 480;
+      letter-spacing: 0.3px;
+    }
+
+    /* ---------- 模块2：求职意向 + PDF按钮（保留PDF图标）---------- */
+    .info-module {
+      padding: 1.8rem 1.6rem;
+    }
+
+    .job-intention h2 {
+      font-size: 0.8rem;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: #1E4F8A;           /* 纯中蓝，原蓝绿#1e648a改为纯蓝 */
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid #3a5fb0; /* 纯蓝 */
+      padding-bottom: 0.6rem;
+    }
+
+    .job-clusters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .job-item {
+      background: rgba(195, 226, 240, 0.7);
+      backdrop-filter: blur(4px);
+      border-radius: 40px;
+      padding: 0.55rem 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0c3c72;           /* 深蓝 */
+      display: inline-flex;
+      border: 0.6px solid rgba(255, 255, 255, 0.8);
+      transition: background 0.2s, border 0.2s;
+    }
+
+    .job-item span {
+      font-size: 1.05rem;
+      font-weight: 560;
+    }
+
+    .job-item:hover {
+      background: rgba(167, 216, 235, 0.85);
+      border: 0.6px solid rgba(255, 255, 255, 0.95);
+    }
+
+    .intention-desc {
+      margin-top: 1.6rem;
+      margin-bottom: 0.8rem;
+      color: #14427b;           /* 深蓝 */
+      font-size: 0.9rem;
+      line-height: 1.6;
+      border-left: 3px solid #3875ae; /* 纯蓝 */
+      padding-left: 1rem;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(2px);
+      border-radius: 0 12px 12px 0;
+    }
+
+    /* PDF 按钮模块 · 整体水平居中（仅横坐标变动） */
+    .pdf-section {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;      /* 水平居中按钮与提示文字 */
+      gap: 0.5rem;
+      width: 100%;            /* 保持父容器宽度，内部元素居中 */
+    }
+
+    .btn-pdf {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(8px);
+      border: 0.8px solid rgba(255,255,255,0.8);
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0f3c72;           /* 深蓝 */
+      text-decoration: none;
+      transition: all 0.2s;
+      width: fit-content;
+      box-shadow: 0 4px 0 rgba(55, 100, 180, 0.3); /* 纯蓝阴影 */
+    }
+
+    .btn-pdf i {
+      font-size: 1.1rem;
+      color: #1d5591;           /* 深蓝 */
+    }
+
+    .btn-pdf:hover {
+      background: rgba(255, 255, 255, 0.75);
+      border: 0.8px solid rgba(255,255,255,0.95);
+      box-shadow: 0 6px 0 rgba(45, 85, 160, 0.35); /* 纯蓝阴影 */
+      transform: translateY(-2px);
+    }
+
+    /* ---------- 模块3：社会实践时间轴 · 无任何图标，全蓝配色 ---------- */
+    .timeline-module {
+      padding: 1.8rem 1.2rem;
+      position: relative;
+      overflow: visible;
+    }
+
+    .timeline-module h3 {
+      font-size: 0.8rem;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: #1E4F8A;           /* 纯中蓝，原蓝绿#1E788A改为纯蓝 */
+      margin-bottom: 1.8rem;
+      border-bottom: 2px solid #3a6fb0; /* 纯蓝 */
+      padding-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      /* 图标已完全删除，仅文字 */
+    }
+
+    /* 竖向时间轴容器 */
+    .timeline-vertical {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      margin-left: 6px;
+    }
+
+    /* 连接线 —— 纯蓝 */
+    .timeline-vertical::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      bottom: 12px;
+      width: 2.2px;
+      background: #405eab;      /* 纯蓝 */
+      transition: background 0.2s;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      cursor: pointer;
+      padding: 0.2rem 0;
+    }
+
+    /* 圆点 · 纯蓝边框 */
+    .timeline-dot {
+      width: 24px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 2.2px solid #1f4f98;  /* 纯蓝 */
+      border-radius: 50%;
+      flex-shrink: 0;
+      z-index: 5;
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+      box-shadow: 0 2px 8px rgba(46, 100, 148, 0.25); /* 纯蓝阴影 */
+      margin-top: 2px;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: rgba(217, 241, 250, 0.95);
+      border-color: #1a58a8;    /* 纯蓝 */
+      transform: scale(1.3);
+      box-shadow: 0 0 0 6px rgba(55, 100, 180, 0.2); /* 纯蓝阴影 */
+    }
+
+    .timeline-content-static {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .timeline-date {
+      font-size: 0.75rem;
+      font-weight: 650;
+      color: #245690;           /* 纯蓝 */
+      letter-spacing: 0.3px;
+      margin-bottom: 2px;
+    }
+
+    .timeline-title {
+      font-size: 1rem;
+      font-weight: 650;
+      color: #0e4075;           /* 深蓝 */
+      line-height: 1.35;
+    }
+
+    /* ---------- 智能跟随提示框（桌面）适配淡蓝背景 ---------- */
+    .timeline-tooltip {
+      position: fixed;
+      z-index: 9999;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 0.8px solid rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      padding: 0.9rem 1.2rem;
+      width: 240px;
+      box-shadow: 0 20px 32px -10px rgba(45, 90, 146, 0.22); /* 纯蓝阴影 */
+      color: #134880;           /* 深蓝 */
+      font-size: 0.8rem;
+      line-height: 1.55;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.15s ease, visibility 0.15s ease;
+    }
+
+    .timeline-tooltip.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .timeline-tooltip::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -8px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px 8px 8px 0;
+      border-color: transparent rgba(255, 255, 255, 0.92) transparent transparent;
+    }
+
+    .timeline-tooltip.arrow-right::before {
+      left: auto;
+      right: -8px;
+      border-width: 8px 0 8px 8px;
+      border-color: transparent transparent transparent rgba(255, 255, 255, 0.92);
+    }
+
+    /* ---------- 右下角纯文本返回按钮 · 保留“←” ---------- */
+    .back-circle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 56px;
+      height: 56px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 0.8px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1c5391;           /* 深蓝 */
+      text-decoration: none;
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1;
+      box-shadow: 0 8px 18px rgba(47, 91, 140, 0.18); /* 纯蓝阴影 */
+      transition: all 0.2s ease;
+      z-index: 200;
+    }
+
+    .back-circle:hover {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(255, 255, 255, 0.95);
+      transform: scale(1.08) translateY(-3px);
+      box-shadow: 0 14px 28px rgba(40, 80, 140, 0.26); /* 纯蓝阴影 */
+      color: #0e3275;           /* 深蓝 */
+    }
+
+    /* ---------- 桌面专用 (≥901px) 增加顶部留白，分隔线显示 ---------- */
+    @media screen and (min-width: 901px) {
+      body {
+        padding-top: 2.2rem;
+      }
+
+      .section-divider {
+        display: block;
+        margin: 1rem 0 0.8rem;
+      }
+    }
+
+    /* ---------- 移动端响应 · 时间轴描述完美填充，全蓝配色 ---------- */
+    @media screen and (max-width: 900px) {
+      .resume-horizon {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .module {
+        min-height: auto;
+        padding: 1.5rem;
+      }
+
+      .pic-wrapper {
+        height: 280px;
+      }
+
+      .timeline-vertical::before {
+        display: none;
+      }
+
+      .timeline-dot {
+        display: none;
+      }
+
+      .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+        cursor: default;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.4);
+      }
+
+      .timeline-item:last-child {
+        border-bottom: none;
+      }
+
+      .timeline-content-static {
+        width: 100%;
+      }
+
+      .timeline-date {
+        font-size: 0.7rem;
+        color: #1E5F8A;         /* 纯蓝，原蓝绿#257F91改为纯蓝 */
+        letter-spacing: 0.3px;
+      }
+
+      .timeline-title {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+        color: #0F3C72;         /* 深蓝，原蓝绿#0f5078改为纯蓝 */
+      }
+
+      /* 移动端详情卡片 · 纯蓝左框线 */
+      .timeline-mobile-desc {
+        font-size: 0.8rem;
+        color: #15547e;         /* 深蓝 */
+        line-height: 1.5;
+        margin-top: 0.3rem;
+        border-left: 3px solid #3877ae; /* 纯蓝 */
+        background: rgba(255,255,255,0.25);
+        backdrop-filter: blur(4px);
+        border-radius: 0 12px 12px 0;
+        padding: 0.7rem 1rem;
+        width: 100%;
+        display: none;
+      }
+
+      .timeline-tooltip {
+        display: none !important;
+      }
+
+      .section-divider {
+        display: none;
+      }
+
+      .back-circle {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+        font-size: 1.8rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      body { padding: 0.4rem 0.8rem 1.5rem; }
+      .top-contact { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+    }
+
+    ::selection {
+      background: rgba(80, 140, 210, 0.3); /* 纯蓝高亮 */
+      color: #0d3a5c;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- 顶部 · 个人信息（无图标）-->
+    <div class="top-contact">
+      华中农业大学（211）· 生物信息学 · 本科
+    </div>
+
+    <!-- 桌面分隔线 -->
+    <hr class="section-divider">
+
+    <!-- 三栏核心布局 -->
+    <div class="resume-horizon">
+
+      <!-- 模块1：简历图片 + 纯文字 -->
+      <div class="module photo-module">
+        <div class="pic-wrapper">
+          <img class="resume-pic" src="resume(March.png" alt="简历预览·产品/策划" loading="lazy">
+        </div>
+        <div class="pic-footer">
+          数理统计 · 编程 · 生物信息
+        </div>
+      </div>
+
+      <!-- 模块2：求职意向 + PDF按钮（按钮及说明整体居中）-->
+      <div class="module info-module">
+        <div class="job-intention">
+          <h2>意向岗位</h2>
+          <div class="job-clusters">
+            <div class="job-item"><span>游戏策划</span></div>
+            <div class="job-item"><span>产品经理</span></div>
+          </div>
+          <div class="intention-desc">
+            26级应届毕业生（本科），211生物信息学，绩点专业前27%，扎实数理统计基础。热爱二次元与游戏，具备策划拆解、原型制作、编程实现与美术设计能力。
+            <br>其它本科选修课程：离散数学、Web开发、C++、数据结构、SQL
+          </div>
+          <div class="intention-desc">
+            全国大学生英语竞赛三等奖；MathorCup大数据建模比赛、美国大学生数学建模比赛建模手。
+          </div>
+          <div class="intention-desc">
+            证书与其它履历补充：计算机二级证书(MsOffice)、高中数学教资；22年新高考一卷语文与英语学科均分132
+          </div>
+        </div>
+
+        <div class="pdf-section">
+          <a href="resume.pdf" class="btn-pdf" target="_blank" rel="noopener noreferrer">
+            <i class="fa-regular fa-file-pdf"></i> 完整简历 (PDF)
+          </a>
+          <p>(页面内的PDF可能未及时更新，请以官网/软件投递简历为准)</p>
+        </div>
+      </div>
+
+      <!-- 模块3：社会实践时间轴 · 全蓝配色 -->
+      <div class="module timeline-module">
+        <h3>社会实践 & 校园活动</h3>
+        <div class="timeline-vertical">
+
+          <div class="timeline-item" data-desc="组织团生会、团建游戏及班级公益活动，负责活动宣传与反馈稿撰写；宣传稿获院级公众号10+次转发。">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content-static">
+              <span class="timeline-date">2022.09 — 2023.06</span>
+              <div class="timeline-title">班级文娱委员</div>
+            </div>
+            <div class="timeline-mobile-desc" style="display: none;"></div>
+          </div>
+
+          <div class="timeline-item" data-desc="校级主题舞蹈比赛，学院团体作品获得第七名。">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content-static">
+              <span class="timeline-date">2022.09 — 2022.11</span>
+              <div class="timeline-title">校园舞蹈大赛</div>
+            </div>
+            <div class="timeline-mobile-desc" style="display: none;"></div>
+          </div>
+
+          <div class="timeline-item" data-desc="实践小组队长，主导活动安排规划、母校师生对接、物资采买、返校宣讲及反馈稿撰写。带领5人团队，承担宣讲主题、宣讲稿制定、反馈新闻稿撰写工作，团体入围优秀团队答辩（前15%）。">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content-static">
+              <span class="timeline-date">2022.12 — 2023.02</span>
+              <div class="timeline-title">寒假社会实践·队长</div>
+            </div>
+            <div class="timeline-mobile-desc" style="display: none;"></div>
+          </div>
+
+          <div class="timeline-item" data-desc="负责团体信息反馈与每日汇报、中期新闻稿撰写与末期宣发，协助队长统筹团体日常工作安排、规划制订，团体实践视频、新闻稿、心得总结材料获院级媒体转载，入围优秀实践团体答辩。">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content-static">
+              <span class="timeline-date">2024.08 — 2024.09</span>
+              <div class="timeline-title">暑期社会实践·副队长</div>
+            </div>
+            <div class="timeline-mobile-desc" style="display: none;"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 桌面跟随提示框 -->
+  <div class="timeline-tooltip" id="timelineTooltip"></div>
+
+  <!-- 右下角纯文本返回按钮（←）-->
+  <a href="index.html" class="back-circle">←</a>
+
+  <script>
+    (function() {
+      'use strict';
+
+      function isDesktop() {
+        return window.innerWidth > 900;
+      }
+
+      const tooltip = document.getElementById('timelineTooltip');
+      const timelineItems = document.querySelectorAll('.timeline-item');
+
+      function applyTimelineMode() {
+        const desktop = isDesktop();
+        timelineItems.forEach(item => {
+          const desc = item.dataset.desc || '暂无详情';
+          const mobileDesc = item.querySelector('.timeline-mobile-desc');
+          if (!mobileDesc) return;
+
+          if (desktop) {
+            mobileDesc.style.display = 'none';
+            mobileDesc.textContent = '';
+          } else {
+            mobileDesc.textContent = desc;
+            mobileDesc.style.display = 'block';
+          }
+        });
+      }
+
+      function initDesktopTooltip() {
+        if (!tooltip) return;
+
+        timelineItems.forEach(item => {
+          item.addEventListener('mouseenter', function(e) {
+            if (!isDesktop()) return;
+            const desc = this.dataset.desc || '暂无详情';
+            tooltip.textContent = desc;
+            tooltip.classList.add('show');
+          });
+
+          item.addEventListener('mousemove', function(e) {
+            if (!isDesktop()) return;
+            let left = e.clientX + 20;
+            let top = e.clientY - 20;
+
+            const tooltipWidth = 240;
+            const tooltipHeight = tooltip.offsetHeight || 100;
+            const winWidth = window.innerWidth;
+            const winHeight = window.innerHeight;
+
+            if (left + tooltipWidth > winWidth - 20) {
+              left = e.clientX - tooltipWidth - 20;
+              tooltip.classList.add('arrow-right');
+            } else {
+              tooltip.classList.remove('arrow-right');
+            }
+
+            if (top + tooltipHeight > winHeight - 20) {
+              top = winHeight - tooltipHeight - 20;
+            }
+            if (top < 20) top = 20;
+
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+          });
+
+          item.addEventListener('mouseleave', function(e) {
+            if (!isDesktop()) return;
+            tooltip.classList.remove('show');
+          });
+        });
+      }
+
+      function handleResize() {
+        applyTimelineMode();
+        if (isDesktop()) {
+          if (tooltip) tooltip.classList.remove('show');
+        } else {
+          if (tooltip) tooltip.classList.remove('show');
+        }
+      }
+
+      applyTimelineMode();
+      initDesktopTooltip();
+      window.addEventListener('resize', handleResize);
+      window.addEventListener('load', function() {
+        applyTimelineMode();
+      });
+    })();
+  </script>
+</body>
+</html>
